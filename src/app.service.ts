@@ -92,16 +92,16 @@ export class AppService {
     // 创建 Person 列表
     var phones: Array<Phone> = [
       {brand: 'xiaomi 8', price: 1999, color: Color.BLUE},
-      {brand: 'ihpone 11', price: 4999, color: Color.GREEN}
+      {brand: 'iphone 11', price: 4999, color: Color.GREEN}
     ];
     var attributes: Map<string, AttributeValue> = new Map([
       ['家乡', {value: '内蒙古', extra: '夏天很凉爽'}],
       ['长相', {value: '很美', extra: '性格还好'}],
     ]);
-    var schools: [string, string, string, string] = ['大雁小学', '大雁中学', '大雁中学', '大雁大学'];
+    var schools: [string, string, string, string] = ['大雁小学', '大雁中学', '大雁高中', '大雁大学'];
     var users: Person[] = [
-      {name: "John", age: 18, phones: phones, attributes: attributes, schools: schools},
-      {name: "Jane", age: 20, phones: [], attributes: new Map<string, AttributeValue>(), schools: schools}
+      {name: "gjj", age: 18, phones: phones, attributes: attributes, schools: schools},
+      {name: "szk", age: 20, phones: [], attributes: new Map<string, AttributeValue>(), schools: schools}
     ];
     var data: ResponseData = {users: users};
     // 创建 ErrorMessage 对象
