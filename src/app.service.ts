@@ -101,7 +101,9 @@ export class AppService {
     var schools: [string, string, string, string] = ['大雁小学', '大雁中学', '大雁高中', '大雁大学'];
     var users: Person[] = [
       {name: "gjj", age: 18, phones: phones, attributes: attributes, schools: schools},
-      {name: "szk", age: 20, phones: [], attributes: new Map<string, AttributeValue>(), schools: schools}
+      {name: "szk", age: 20, phones: [], attributes: new Map<string, AttributeValue>(), schools: [
+        '谢集小学', '谢集中学', '谢集高中', '谢集大学'
+      ]}
     ];
     var data: ResponseData = {users: users};
     // 创建 ErrorMessage 对象
