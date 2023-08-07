@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Type } from '@nestjs/common';
 
 /* 
 基础类型
@@ -82,6 +82,42 @@ export interface Response {
   error: ErrorMessage
 }
 
+class Pencel {
+  name: string = 'Pencel'
+}
+
+class Paper {
+  name: string = 'Paper'
+}
+
+// 泛型
+export interface ResponseWrapper<T> {
+  code: number,
+  data?: T
+}
+
+export interface Box<TYPE2> {
+  material: TYPE2
+}
+
+// 传参为 T, 把一个任意类型的对象转换为 string
+function ToString<T>(data: T) : string {
+  return data.toString()
+}
+
+// 返回值是 T, 从 box 取回 material
+function GetMaterial<T>(box: Box<T>): T {
+  return box.material;
+}
+
+function GetMaterial1(box: Box<Pencel>): Pencel {
+  return box.material;
+}
+
+function GetMaterial2(box: Box<Paper>): Paper {
+  return box.material;
+}
+
 @Injectable()
 export class AppService {
   getHello(): string {
@@ -114,4 +150,16 @@ export class AppService {
     };
     return response;
   }
+
+  /**
+   * 返回一个 Box, 里面存了一个物料, 物料的内容为随机
+   */
+  getBox() : ResponseWrapper<Box<any>> {
+    const materials : Array<any> = [
+      new Pencel(), new Paper()
+    ];
+    const box: Box<any> = {material: materials[Math.floor(Math.random() * materials.length)]};
+    return {code: 200, data: box};
+  }
 }
+
