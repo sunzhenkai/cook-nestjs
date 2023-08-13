@@ -118,6 +118,80 @@ function GetMaterial2(box: Box<Paper>): Paper {
   return box.material;
 }
 
+async function Task4() {
+  setTimeout(() => {
+    // 异步代码
+    console.log('timeout 444')
+  }, 1000)
+  // 同步代码
+  console.log('444')
+}
+
+async function Task3() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('333')
+      resolve('task 333')
+    }, 1000)
+  });
+}
+
+async function Task2() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('222')
+      resolve('task 222')
+    }, 1000)
+  });
+}
+
+async function MainTask() {
+  console.log('111')
+  var tasks = [Task2, Task3];
+  var prommises = tasks.map(async task => {
+    return await task()
+  });
+  console.log(prommises, 'kkkk')
+  console.log('000')
+}
+
+async function MainTask2() {
+  console.log('111')
+  var tasks = [Task2, Task3];
+  var prommises = tasks.map(async task => {
+    return await task()
+  });
+
+  var result = []
+  await Promise.all(prommises).then(() => {
+    prommises.forEach(p => {
+      p.then(res => result.push(res));
+    });
+  });
+  
+  console.log(prommises, 'kkkk')
+  console.log('000', result)
+}
+
+async function MainTask3() {
+  console.log('111')
+  var tasks = [Task2, Task3];
+  var prommises = tasks.map(async task => {
+    return await task()
+  });
+
+  var result = []
+  // await Promise.all(prommises).then(() => {
+  //   prommises.forEach(p => {
+  //     p.then(res => result.push(res));
+  //   });
+  // });
+  await Task4();
+  
+  console.log(prommises, 'kkkk')
+  console.log('000', result)
+}
+
 @Injectable()
 export class AppService {
   getHello(): string {
@@ -161,5 +235,8 @@ export class AppService {
     const box: Box<any> = {material: materials[Math.floor(Math.random() * materials.length)]};
     return {code: 200, data: box};
   }
-}
 
+  testAsync() {
+    MainTask3()
+  }
+}

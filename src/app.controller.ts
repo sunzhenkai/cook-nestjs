@@ -26,4 +26,10 @@ export class AppController {
   getUsersV2(): ResponseWrapper<Response> {
     return { code: 200, data: this.appService.getUserList() } as ResponseWrapper<Response>;
   }
+
+  @Get('async')
+  asyncTest() {
+    this.appService.testAsync()
+    return { code: 200 } as ResponseWrapper<Response>;
+  }
 }
